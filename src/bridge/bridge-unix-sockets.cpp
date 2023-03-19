@@ -157,7 +157,7 @@ BridgeStatus runBridgeFrame(SlimeVRDriver::VRDriver& driver) {
     try {
         driver.Log("bridge start");
         if (!client.IsOpen()) {
-        driver.Log("bridge client not open");
+               driver.Log("bridge client not open");
             // TODO: do this once in the constructor or something
             if(const char* ptr = std::getenv("XDG_RUNTIME_DIR")) {
                 driver.Log("bridge xdg runtime dir: " + std::string(ptr));
