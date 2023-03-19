@@ -162,6 +162,7 @@ BridgeStatus runBridgeFrame(SlimeVRDriver::VRDriver& driver) {
             if(const char* ptr = std::getenv("XDG_RUNTIME_DIR")) {
                 driver.Log("bridge xdg runtime dir: " + std::string(ptr));
                 const fs::path xdg_runtime = ptr;
+                driver.Log("bridge xdg runtime socket name final " + std::string(xdg_runtime / SOCKET_NAME));
                 client.Open((xdg_runtime / SOCKET_NAME).native());
             } else {
                 driver.Log("bridge tmp chosen");
