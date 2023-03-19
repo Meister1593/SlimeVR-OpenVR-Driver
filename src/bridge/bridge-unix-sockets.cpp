@@ -155,25 +155,18 @@ bool sendBridgeMessage(messages::ProtobufMessage& message, SlimeVRDriver::VRDriv
 
 BridgeStatus runBridgeFrame(SlimeVRDriver::VRDriver& driver) {
     try {
-        driver.Log("bridge start");
         if (!client.IsOpen()) {
-               driver.Log("bridge client not open");
             // TODO: do this once in the constructor or something
             if(const char* ptr = std::getenv("XDG_RUNTIME_DIR")) {
-                driver.Log("bridge xdg runtime dir: " + std::string(ptr));
                 const fs::path xdg_runtime = ptr;
-                driver.Log("bridge xdg runtime socket name final " + std::string(xdg_runtime / SOCKET_NAME));
                 client.Open((xdg_runtime / SOCKET_NAME).native());
             } else {
-                driver.Log("bridge tmp chosen");
                 client.Open((fs::path(TMP_DIR) / SOCKET_NAME).native());
             }
         }
-        driver.Log("bridge client update once");
         client.UpdateOnce();
 
         if (!client.IsOpen()) {
-        driver.Log("bridge client not open for real");
             return BRIDGE_DISCONNECTED;
         }
         return BRIDGE_CONNECTED;
