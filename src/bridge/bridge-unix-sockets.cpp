@@ -172,7 +172,6 @@ BridgeStatus runBridgeFrame(SlimeVRDriver::VRDriver& driver) {
         return BRIDGE_CONNECTED;
     } catch (const std::exception& e) {
         client.Close();
-        driver.Log("bridge error: " + std::string(e.what()));
         return BRIDGE_ERROR;
     }
 }
