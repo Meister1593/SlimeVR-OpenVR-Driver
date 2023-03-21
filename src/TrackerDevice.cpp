@@ -1,4 +1,6 @@
 #include "TrackerDevice.hpp"
+#include <stdio.h>
+#include <stdlib.h>
 
 SlimeVRDriver::TrackerDevice::TrackerDevice(std::string serial, int deviceId, TrackerRole trackerRole_):
     serial_(serial), trackerRole(trackerRole_), deviceId_(deviceId)
@@ -42,7 +44,7 @@ void SlimeVRDriver::TrackerDevice::Update()
 
 void SlimeVRDriver::TrackerDevice::PositionMessage(messages::Position &position)
 {
-    Log("Device index updating: " + this->device_index);
+    fprintf(stderr, "Device index updating: %d", this->device_index_);
     if (this->device_index_ == vr::k_unTrackedDeviceIndexInvalid)
         return;
 
