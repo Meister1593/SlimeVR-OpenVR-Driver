@@ -44,7 +44,7 @@ void SlimeVRDriver::TrackerDevice::Update()
 
 void SlimeVRDriver::TrackerDevice::PositionMessage(messages::Position &position)
 {
-    fprintf(stderr, "Device index updating: %d", this->device_index_);
+    GetDriver()->Log("Device index updating: " + this->device_index_);
     if (this->device_index_ == vr::k_unTrackedDeviceIndexInvalid)
         return;
 
