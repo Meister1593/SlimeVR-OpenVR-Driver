@@ -46,7 +46,7 @@ void SlimeVRDriver::TrackerDevice::PositionMessage(messages::Position &position)
 {
     if (this->device_index_ == vr::k_unTrackedDeviceIndexInvalid)
         return;
-    GetDriver()->Log("Device index updating: " + this->device_index_);
+    GetDriver()->Log("Device index updating: " + this->serial_ + " , index: " + this->device_index_);
 
     // Setup pose for this frame
     auto pose = this->last_pose_;
@@ -84,6 +84,8 @@ void SlimeVRDriver::TrackerDevice::PositionMessage(messages::Position &position)
 
 void SlimeVRDriver::TrackerDevice::StatusMessage(messages::TrackerStatus &status)
 {
+    if (this->device_index_ == vr::k_unTrackedDeviceIndexInvalid)
+        return;  
     auto pose = this->last_pose_;
     switch (status.status())
     {
